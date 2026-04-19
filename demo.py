@@ -22,15 +22,13 @@ console = Console()
 
 # Sample questions that highlight KG advantages
 DEMO_QUESTIONS = [
-    "How does the AuthenticationService relate to the UserManager?",
-    "What services depend on the PermissionManager?",
-    "Explain the file upload workflow and all the services involved.",
-    "How are share links related to notifications?",
-    "What is the relationship between QuotaManager and StorageManager?",
-    "Which services interact with the FileManager?",
-    "How does the search functionality work with permissions?"
+    "What is solar energy, and through which main technologies can it be harnessed?",
+    "How do active solar techniques differ from passive solar techniques in terms of function and purpose?",
+    "According to the passage, what factors limit the amount of solar energy that humans can realistically use?",
+    "What role do solar hot water systems play in domestic energy use, and which countries are leaders in their deployment?",   
+    "How does thermal mass contribute to heating and cooling buildings in different climates?",
+    "What are the main types of solar cookers, and how do their operating temperatures and requirements differ?",
 ]
-
 
 def setup_environment():
     """Load and validate environment variables."""
@@ -64,7 +62,7 @@ async def initialize_systems():
     neo4j_uri = os.getenv("NEO4J_URI")
     neo4j_username = os.getenv("NEO4J_USERNAME")
     neo4j_password = os.getenv("NEO4J_PASSWORD")
-    model_name = os.getenv("OPENAI_MODEL", "gpt-4-turbo-preview")
+    model_name = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
     embedding_model = os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small")
 
     # Initialize Traditional RAG
@@ -76,7 +74,7 @@ async def initialize_systems():
     )
 
     # Load and index documents
-    doc_path = Path("sample_data/api_documentation.txt")
+    doc_path = Path("sample_data/solar_energy.txt")
     if not doc_path.exists():
         console.print(f"[bold red]Error: Sample data not found at {doc_path}[/bold red]")
         return None, None
@@ -112,7 +110,7 @@ async def initialize_systems():
         console.print("[yellow]Building knowledge graph (this may take a few minutes)...[/yellow]")
         # Split documents for KG
         doc_texts = [doc.page_content for doc in documents]
-        await kg_system.add_documents_to_graph(doc_texts, source="api_documentation")
+        await kg_system.add_documents_to_graph(doc_texts, source="solar_energy")
 
         stats = kg_system.get_graph_statistics()
         console.print(f"[green][OK] Knowledge Graph initialized[/green]")

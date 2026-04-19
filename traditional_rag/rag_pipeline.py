@@ -19,7 +19,7 @@ class TraditionalRAG:
     def __init__(
         self,
         openai_api_key: str,
-        model_name: str = "gpt-4-turbo-preview",
+        model_name: str = "gpt-4o-mini",
         embedding_model: str = "text-embedding-3-small",
         chunk_size: int = 1000,
         chunk_overlap: int = 200
@@ -109,7 +109,7 @@ class TraditionalRAG:
 
     def _create_qa_chain(self) -> None:
         """Create the QA chain with custom prompt."""
-        prompt_template = """You are a helpful AI assistant answering questions about the CloudStore API documentation.
+        prompt_template = """You are a helpful AI assistant answering questions about the Solar Energy documentation.
 
 Use the following pieces of context to answer the question at the end. If you don't know the answer based on the context, say so - don't make up information.
 

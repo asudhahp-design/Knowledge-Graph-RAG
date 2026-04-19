@@ -20,7 +20,7 @@ class KnowledgeGraphRAG:
         neo4j_user: str,
         neo4j_password: str,
         openai_api_key: str,
-        model_name: str = "gpt-4-turbo-preview"
+        model_name: str = "gpt-4o-mini"
     ):
         """
         Initialize Knowledge Graph RAG system.
@@ -80,7 +80,7 @@ class KnowledgeGraphRAG:
     async def add_documents_to_graph(
         self,
         documents: List[str],
-        source: str = "api_documentation"
+        source: str = "solar_energy"
     ) -> None:
         """
         Add documents to the knowledge graph.
@@ -157,7 +157,7 @@ class KnowledgeGraphRAG:
 
         # Generate answer using LLM
         generation_start = time.time()
-        prompt = f"""You are a helpful AI assistant answering questions about the CloudStore API documentation.
+        prompt = f"""You are a helpful AI assistant answering questions about the solar_energy.
 
 Use the following knowledge graph facts to answer the question. These facts represent relationships and entities extracted from the documentation.
 
